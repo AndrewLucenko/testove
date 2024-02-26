@@ -55,9 +55,11 @@ export class ListComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.productController.addProduct(result);
+      if (result) {
+        this.productController.addProduct(result);
 
-      this._snackBar.open(`New product add`, 'Close');
+        this._snackBar.open(`New product add`, 'Close');
+      }
     });
   }
 
@@ -69,9 +71,11 @@ export class ListComponent {
 
 
     dialogRef.afterClosed().subscribe(result => {
-      this.productController.updateProduct({ id: product.id, ...result});
+      if (result) {
+        this.productController.updateProduct({id: product.id, ...result});
 
-      this._snackBar.open(`Product with id ${product.id} updated`, 'Close');
+        this._snackBar.open(`Product with id ${product.id} updated`, 'Close');
+      }
     });
   }
 

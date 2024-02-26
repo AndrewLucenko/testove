@@ -38,11 +38,14 @@ export class ProductFormDialogComponent {
     public dialogRef: MatDialogRef<ProductFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProductsInterface
 ) {
+    const defaultData = { name: '', description: '', price: null, quantity: null };
+    const formData = { ...defaultData, ...data };
+
     this.productForm = this.fb.group({
-      name: [data.name ?? '', Validators.required],
-      description: [data.description ?? '', Validators.required],
-      price: [data.price ?? null, [Validators.required, Validators.min(0)]],
-      quantity: [data.quantity ?? null, [Validators.required, Validators.min(0)]]
+      name: [formData.name, Validators.required],
+      description: [formData.description, Validators.required],
+      price: [formData.price, [Validators.required, Validators.min(0)]],
+      quantity: [formData.quantity, [Validators.required, Validators.min(0)]]
     });
   }
 
